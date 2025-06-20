@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tebak Sifat Berdasarkan Nama</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(45deg, #2D336B, #A9B5DF); /*ganti warna bg*/
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            animation: bgAnimation 5s ease infinite;
+        }
+
+        @keyframes bgAnimation {
+            0% { background: linear-gradient(45deg,#2D336B, #A9B5DF);}
+            50% { background: linear-gradient(45deg,#2D336B, #A9B5DF);}
+            100% { background: linear-gradient(45deg,#2D336B, #A9B5DF);}
+        }
+        .container {
+            background-color: #fff;
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 2);
+            text-align: center;
+            width: 90%;
+            transform: translateY(100px);
+            animation: slideUp 1s forwards;
+        }
+
+        @keyframes slideUp {
+            from {
+                transform: translateY(100px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        h1 {
+            margin-bottom: 20px;
+            color: #2D336B;/*Ubah warna teks judul*/
+            font-size: 2cm;
+            letter-spacing: 2px;
+            animation: fadeIn 1.5s ease;
+        }
+
+        @keyframes fadeIn {
+            0% { opacity: 0;}
+            100% { opacity: 1;}
+        }
+
+        input {
+            padding: 12px;
+            margin-bottom: 20px;
+            width: 80%;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            font-size: 1.2cm;
+            transition: all 0.3s ease-in-out;
+        }
+
+        input:focus {
+            border-color: #2D336B; /*ubah warna border saat fokus*/
+            outline: none;
+            box-shadow: 0 0 10px rgba(45, 51, 107, 0.5); /*ubah warna shadow*/
+        }
+
+        button {
+            padding: 12px 30px;
+            background-color: #2D336B;/*ubah warna tombol*/
+            color: white;
+            border: none;
+            border-radius: 30px;
+            font-size: 1.2cm;
+            cursor: pointer;
+            transition: transform 0.2s ease-in-out;
+        }
+
+        button:hover {
+            background-color: #A9B5DF; /*ubah warna tombol saat hover*/
+           transform: scale(1.1);
+        }
+
+        #tabelHasil {
+            width: 100%;
+            margin-top: 20px;
+            border-collapse: collapse;
+            animation: fadeInTable 1s ease;
+            max-height: 300px; /*atur tinggi maksimal tabel*/
+            overflow-y: auto; /*aktifkan scroll vertikal*/
+            display: block; /* menjadikan tabel menjadi block agar bisa di scroll*/
+        }
+
+        #tabelHasil thead, #tabelHasil tbody {
+            padding: 12px;
+            border: 1px solid #ddd;
+            text-align: left;
+            width: 33%; /*menjaga agar kolom tabel tetap konsisten*/
+        }
+
+        #tabelHasil th {
+            background-color: #2D336B;
+            color: white;
+        }
+
+        #tabelHasil tbody tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+        #tabelHasil tbody tr:hover {
+            background-color: #A9B5DF;
+        }
+
+
+           .hapusBtn {
+            background-color: #ff3333;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            padding: 5px 10px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+           }
+
+
+           .hapusBtn:hover {
+            background-color: #ff1a1a;
+           }
+           .span {
+            color: #ff1a1a;
+           }
+    </style>
+
+</head>
+<body>
+
+    <div class="container">
+        <h1>Tebak Sifat Berdasarkan Nama
+            <br><span>Tuliskan Nama Anda di Kolom Komentar </span></h1>
+        
+    <!--Input Nama-->
+    <input type="text" id="namaInput" placeholder="Masukan Nama..."/>
+    <button onclick="tebakSifat ()">Tebak Sifat</button>
+
+    <!--Tabel Hasil-->
+    <table id="tabelHasil">
+        <thead>
+            <tr>
+                <th>Nama</th>
+                <th>Sifat</th>
+                <th>Aksi</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!--Baris Hasil akan ditambahkan di sini-->
+        </tbody>
+    </table>
+    </div>
+
+    <script>
+        function tebakSifat() {
+            const nama=document.getElementById("namaInput").value.trim().toLowerCase();
+            const tabelBody= document.getElementById("tabelHasil").getElementsByTagName("tbody")[0];
+
+            //Ambil huruf tengah dari nama
+            const panjangNama= nama.length;
+            let hurufTengah="";
+
+            if (panjangNama % 2 ===1) {
+                //Jika jumlah huruf ganjil, ambil huruf tengah
+                hurufTengah=nama.charAt(Math.floor(panjangNama/2));
+            } else {
+                //Jika jumlah huruf genap, ambil huruf tengah kiri
+                hurufTengah=nama.charAt(Math.floor(panjangNama/2)-1);
+            }
+        }
+
+        //Daftar sifat berdasarkan huruf tengah
+        let sifat="";
+        const sifatList={
+            "a": "Kamu sangat kreatif dan penuh ide brilian.",
+            "b": "Kamu sangat analitis"
+        }
+    </script>
+</body>
